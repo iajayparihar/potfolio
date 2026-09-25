@@ -32,7 +32,7 @@ export default function Hero() {
     <section id="home" className="hero" aria-labelledby="hero-title">
       <div className="container hero-grid">
         <div className="hero-copy">
-          <p className="hero-status mono">
+          <p className="hero-status mono loop">
             <span className="pulse" aria-hidden="true" /> <span className="hide-sm">Backend · Security · AI · </span>{profile.tagline}
           </p>
           <h1 id="hero-title" className="hero-title">

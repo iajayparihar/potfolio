@@ -42,7 +42,7 @@ export default function FlowDiagram({ steps, branches = [], branchLabel, title, 
   );
 
   return (
-    <div className={`flow flow--${layout} flow--${accent}`} ref={ref}>
+    <div className={`flow flow--${layout} flow--${accent} loop`} ref={ref}>
       {title && <p className="flow-title mono">{title}</p>}
       <ol className="flow-steps">
         {steps.map((s, i) => (

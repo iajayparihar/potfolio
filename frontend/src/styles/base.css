@@ -38,7 +38,7 @@ h1, h2, h3, h4 { color: var(--text-1); font-family: var(--font-display); font-we
     var(--bg-0);
 }
 .page::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
+  content: ''; position: absolute; inset: 0 0 auto; height: 1000px; pointer-events: none;
   background-image:
     linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
@@ -105,6 +105,10 @@ h1, h2, h3, h4 { color: var(--text-1); font-family: var(--font-display); font-we
   transition-delay: calc(var(--d, 0) * 70ms);
 }
 .js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ---------- Decorative loops pause while offscreen ---------- */
+.loop:not(.is-playing), .loop:not(.is-playing) *, .loop:not(.is-playing) *::before, .loop:not(.is-playing) *::after,
+.loop:not(.is-playing)::before, .loop:not(.is-playing)::after { animation-play-state: paused !important; }
 
 /* ---------- Scroll progress ---------- */
 .progress {

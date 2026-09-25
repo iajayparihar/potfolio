@@ -17,7 +17,8 @@ export default function Navigation({ active }) {
         setScrolled(window.scrollY > 8);
       });
     };
-    onScroll();
+    // No initial call: reading scrollHeight on mount forces a full-page layout during load.
+    if (window.scrollY > 8) onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
   }, []);

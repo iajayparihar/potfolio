@@ -9,10 +9,14 @@
   border: 1px solid var(--line-2); border-radius: var(--r-pill); font-size: var(--fs-xs); color: var(--text-2); letter-spacing: 0.04em;
   background: rgba(255, 255, 255, 0.02);
 }
-.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); animation: pulse 2.4s infinite; }
-@keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
+.pulse, .live { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); }
+.pulse::after, .live::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--emerald);
+  animation: pulse 2.4s var(--ease-out) infinite;
+}
+@keyframes pulse { from { transform: scale(1); opacity: 0.6; } 70%, to { transform: scale(2.6); opacity: 0; } }
 
-.hero-title { font-size: var(--fs-hero); font-weight: 600; line-height: 0.95; letter-spacing: -0.045em; animation: rise 0.9s var(--ease-out) both; }
+.hero-title { font-size: var(--fs-hero); font-weight: 600; line-height: 0.95; letter-spacing: -0.045em; }
 .hero-dot { color: var(--violet); }
 .hero-role {
   display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: var(--s-5);
@@ -20,7 +24,7 @@
   animation: rise 0.9s 0.08s var(--ease-out) both;
 }
 .hero-role .sep { color: var(--text-3); }
-.hero-statement { margin-top: var(--s-5); max-width: 34ch; font-size: var(--fs-lg); line-height: 1.45; color: var(--text-1); animation: rise 0.9s 0.16s var(--ease-out) both; }
+.hero-statement { margin-top: var(--s-5); max-width: 34ch; font-size: var(--fs-lg); line-height: 1.45; color: var(--text-1); }
 .hero-sub { margin-top: var(--s-3); max-width: 52ch; color: var(--text-2); animation: rise 0.9s 0.22s var(--ease-out) both; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); animation: rise 0.9s 0.28s var(--ease-out) both; }
 .hero-links { display: flex; flex-wrap: wrap; gap: var(--s-1); margin-top: var(--s-4); margin-left: calc(var(--s-3) * -1); animation: rise 0.9s 0.34s var(--ease-out) both; }
@@ -60,8 +64,7 @@
 .hero-diagram-rows { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: var(--s-4); padding: var(--s-5) var(--s-4); }
 .hd-row { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-2); }
 .hd-row + .hd-row::before {
-  content: ''; position: absolute; left: 50%; top: calc(var(--s-4) * -1); width: 1px; height: var(--s-4);
-  background: linear-gradient(to bottom, transparent, var(--cyan), transparent); background-size: 100% 200%; animation: stream 1.6s linear infinite;
+  content: ''; position: absolute; left: 50%; top: calc(var(--s-4) * -1); width: 1px; height: var(--s-4); background: rgba(34, 211, 238, 0.35);
 }
 .hd-node {
   display: inline-flex; flex-direction: column; align-items: center; padding: 6px 12px; border-radius: var(--r-md);
@@ -71,7 +74,7 @@
 .hd-node.g-security { border-color: rgba(52, 211, 153, 0.35); }
 .hd-node.g-data { border-color: rgba(34, 211, 238, 0.3); }
 .hd-node.g-ai { border-color: rgba(139, 124, 246, 0.4); }
-@keyframes stream { from { background-position: 0 100%; } to { background-position: 0 -100%; } }
+
 
 @media (max-width: 899px) {
   .hero { min-height: auto; }
@@ -129,7 +132,7 @@
 .timeline-head h3 { font-size: var(--fs-xl); }
 .timeline-company { margin-top: var(--s-1); color: var(--text-2); }
 .timeline-period { display: inline-flex; align-items: center; gap: var(--s-2); padding: 6px 12px; border: 1px solid var(--line-2); border-radius: var(--r-pill); font-size: var(--fs-xs); color: var(--text-1); }
-.live { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); animation: pulse 2.4s infinite; }
+
 .timeline-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-6); }
 .timeline-group h4 { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: var(--s-2); }
 .timeline-group li { position: relative; padding-left: var(--s-4); margin-top: var(--s-2); }
@@ -162,12 +165,15 @@
 .flow-step.is-active .flow-node { border-color: var(--acc); background: var(--acc-soft); box-shadow: 0 0 0 3px var(--acc-soft); transform: translateX(4px); }
 .flow-step.is-active .flow-idx, .flow-step.is-active .flow-tag { color: var(--acc); }
 
-/* Vertical connectors with a travelling data stream */
+/* Connectors: static line + a data packet that travels along it (transform/opacity only) */
 .flow-steps .flow-step + .flow-step::before {
-  content: ''; position: absolute; left: 24px; top: -10px; width: 1px; height: 10px;
-  background: linear-gradient(to bottom, transparent, var(--acc), transparent); background-size: 100% 200%;
-  animation: stream 1.2s linear infinite; opacity: 0.8;
+  content: ''; position: absolute; left: 24px; top: -10px; width: 1px; height: 10px; background: var(--line-2);
 }
+.flow-steps .flow-step.is-active + .flow-step::after {
+  content: ''; position: absolute; left: 22.5px; top: -12px; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--acc); box-shadow: 0 0 6px var(--acc); animation: packet 0.9s var(--ease-in-out) infinite;
+}
+@keyframes packet { from { transform: translateY(0); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(10px); opacity: 0; } }
 
 .flow-branches { padding: var(--s-3); border: 1px dashed var(--line-2); border-radius: var(--r-md); }
 .flow-branch-label { font-size: 11px; color: var(--text-3); margin-bottom: var(--s-2); }
@@ -186,13 +192,10 @@
   .flow--auto .flow-tag { text-align: left; }
   .flow--auto .flow-label { font-size: 13px; overflow-wrap: anywhere; hyphens: auto; }
   .flow--auto .flow-step.is-active .flow-node { transform: translateY(-4px); }
-  .flow--auto .flow-steps .flow-step + .flow-step::before {
-    left: -14px; top: 50%; width: 14px; height: 1px;
-    background: linear-gradient(to right, transparent, var(--acc), transparent); background-size: 200% 100%;
-    animation-name: stream-x;
-  }
+  .flow--auto .flow-steps .flow-step + .flow-step::before { left: -14px; top: 50%; width: 14px; height: 1px; }
+  .flow--auto .flow-steps .flow-step.is-active + .flow-step::after { left: -16px; top: calc(50% - 1.5px); animation-name: packet-x; }
 }
-@keyframes stream-x { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@keyframes packet-x { from { transform: translateX(0); opacity: 0; } 30% { opacity: 1; } to { transform: translateX(14px); opacity: 0; } }
 
 /* =========================================================
    FEATURED CASE STUDIES
@@ -311,10 +314,10 @@
   background: linear-gradient(90deg, var(--violet), var(--cyan)); opacity: 0.6;
 }
 .arch-join::after {
-  content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px;
-  background: linear-gradient(90deg, transparent, #fff, transparent); background-size: 40% 100%; background-repeat: no-repeat;
-  animation: stream-x 2s linear infinite;
+  content: ''; position: absolute; left: 0; top: calc(50% - 2px); width: 5px; height: 5px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 8px var(--cyan); animation: join 2.4s var(--ease-in-out) infinite;
 }
+@keyframes join { from { transform: translateX(0); opacity: 0; } 20%, 80% { opacity: 1; } to { transform: translateX(75px); opacity: 0; } }
 .arch-join span {
   position: relative; z-index: 1; padding: 4px 6px; background: var(--bg-0); border: 1px solid var(--line-2); border-radius: var(--r-sm);
   font-size: 10px; color: var(--text-3); writing-mode: vertical-rl; transform: rotate(180deg);
@@ -346,8 +349,8 @@
 .const-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--s-7); align-items: center; }
 .const-stage { position: relative; width: 100%; max-width: 620px; aspect-ratio: 1; margin: 0 auto; }
 .const-orbits { position: absolute; inset: 0; width: 100%; height: 100%; }
-.const-orbits circle { fill: none; stroke: var(--line-2); stroke-width: 0.15; stroke-dasharray: 0.6 0.9; transform-origin: 50% 50%; animation: spin 120s linear infinite; }
-.const-orbits circle + circle { animation-direction: reverse; animation-duration: 180s; }
+.const-orbits { animation: spin 160s linear infinite; }
+.const-orbits circle { fill: none; stroke: var(--line-2); stroke-width: 0.15; stroke-dasharray: 0.6 0.9; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .const-center {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 22%; aspect-ratio: 1;
@@ -406,7 +409,7 @@
 .sim-bar { display: flex; align-items: center; gap: var(--s-3); padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: 11px; color: var(--text-3); }
 .sim-room { color: var(--cyan); padding: 2px 8px; border: 1px solid rgba(34, 211, 238, 0.3); border-radius: var(--r-pill); }
 .sim-timer { flex: 1; height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
-.sim-timer-fill { display: block; height: 100%; background: var(--grad-accent); transform-origin: left; animation: timer 9s linear infinite; }
+.sim-timer-fill { display: block; height: 100%; background: var(--grad-accent); transform-origin: left; animation: timer 9s linear infinite; will-change: transform; }
 @keyframes timer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 .sim-body { display: grid; grid-template-columns: 1.5fr 1fr; min-height: 220px; }
 .sim-canvas { position: relative; padding: 12px; border-right: 1px solid var(--line); background:

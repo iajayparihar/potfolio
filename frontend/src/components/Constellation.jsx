@@ -36,7 +36,7 @@ export default function Constellation() {
         </div>
 
         <div className="const-grid">
-          <div className="const-stage" data-reveal>
+          <div className="const-stage loop" data-reveal>
             <svg className="const-orbits" viewBox="0 0 100 100" aria-hidden="true">
               <circle cx="50" cy="50" r="26" />
               <circle cx="50" cy="50" r="44" />

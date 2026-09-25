@@ -7,7 +7,7 @@ const chat = [
 
 export default function ScribbleSim() {
   return (
-    <figure className="sim" aria-label="Illustration of the game: a shared room with a drawing canvas, timer and guess chat">
+    <figure className="sim loop" aria-label="Illustration of the game: a shared room with a drawing canvas, timer and guess chat">
       <div className="sim-bar mono" aria-hidden="true">
         <span className="sim-room">room · K7Q2</span>
         <span className="sim-timer"><span className="sim-timer-fill" /></span>

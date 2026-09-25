@@ -18,7 +18,7 @@ export default function Architecture() {
           <div className="arch-col panel" data-reveal>
             <FlowDiagram steps={architecture.core} title="core.request_path" layout="vertical" accent="violet" />
           </div>
-          <div className="arch-join" aria-hidden="true">
+          <div className="arch-join loop" aria-hidden="true">
             <span className="mono">service layer ⇄ ai</span>
           </div>
           <div className="arch-col panel" data-reveal style={{ '--d': 1 }}>

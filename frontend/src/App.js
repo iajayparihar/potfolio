@@ -34,6 +34,15 @@ function useScrollReveal() {
 // Sections without their own nav item highlight the closest one.
 const NAV_ALIAS = { stack: 'architecture', 'more-projects': 'projects' };
 
+// Decorative CSS loops only run while on screen (see .loop in base.css).
+function useLoopVisibility() {
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => e.target.classList.toggle('is-playing', e.isIntersecting)));
+    document.querySelectorAll('.loop').forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
 function useActiveSection() {
   const [active, setActive] = useState('home');
   useEffect(() => {
@@ -52,6 +61,7 @@ function useActiveSection() {
 
 export default function App() {
   useScrollReveal();
+  useLoopVisibility();
   const active = useActiveSection();
 
   return (

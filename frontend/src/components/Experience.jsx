@@ -23,7 +23,7 @@ export default function Experience() {
                     <h3>{job.role}</h3>
                     <p className="timeline-company">{job.company}</p>
                   </div>
-                  <p className="timeline-period mono">
+                  <p className="timeline-period mono loop">
                     {job.current && <span className="live" aria-hidden="true" />}
                     {job.period}
                   </p>
