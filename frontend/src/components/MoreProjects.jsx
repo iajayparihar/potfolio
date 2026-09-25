@@ -1,4 +1,5 @@
-import { ArrowUpRight, Github } from 'lucide-react';
+import { useRef } from 'react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Github } from 'lucide-react';
 import { moreProjects } from '../data/profile';
 import SectionHead from './SectionHead';
 import ScribbleSim from './ScribbleSim';
@@ -26,11 +27,14 @@ function Links({ links }) {
   );
 }
 
-function Project({ p, wide }) {
+function Project({ p, i, wide }) {
   return (
-    <article className={`proj panel ${wide ? 'proj--wide' : ''}`} aria-labelledby={`${p.id}-title`} data-reveal>
-      <div className="proj-copy">
+    <article className="proj panel" aria-labelledby={`${p.id}-title`} data-reveal>
+      <div className="proj-top">
+        <span className="proj-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
         <p className="proj-kind mono">{p.kind}</p>
+      </div>
+      <div className="proj-copy">
         <h3 id={`${p.id}-title`}>{p.name}</h3>
         <p className="proj-summary">{p.summary}</p>
         <ul className="proj-points">{p.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
@@ -53,7 +57,8 @@ function Project({ p, wide }) {
 }
 
 export default function MoreProjects() {
-  const [first, ...rest] = moreProjects;
+  const track = useRef(null);
+  const scroll = (dir) => track.current?.scrollBy({ left: dir * Math.min(460, track.current.clientWidth * 0.86), behavior: 'smooth' });
   return (
     <section id="more-projects" className="section" aria-labelledby="more-title">
       <div className="container">
@@ -64,9 +69,12 @@ export default function MoreProjects() {
           title={<>Personal projects, <em>built from the data model up.</em></>}
           lede="Independent builds on my own GitHub — real-time systems, multi-tenant SaaS foundations and access control."
         />
-        <div className="projs">
-          <Project p={first} wide />
-          {rest.map((p) => <Project key={p.id} p={p} />)}
+        <div className="projs" ref={track} role="region" aria-label="Personal projects, scroll horizontally" tabIndex={0}>
+          {moreProjects.map((p, i) => <Project key={p.id} p={p} i={i} wide={i === 0} />)}
+        </div>
+        <div className="projs-nav">
+          <button type="button" className="btn btn--sm" onClick={() => scroll(-1)} aria-label="Previous projects"><ArrowLeft size={14} aria-hidden="true" /></button>
+          <button type="button" className="btn btn--sm" onClick={() => scroll(1)} aria-label="Next projects"><ArrowRight size={14} aria-hidden="true" /></button>
         </div>
       </div>
     </section>

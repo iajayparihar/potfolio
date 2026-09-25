@@ -13,6 +13,8 @@ export const profile = {
   email: 'ajayparihar876@gmail.com',
   location: 'India',
   site: 'https://iajayparihar.in',
+  // Optional cut-out portrait (transparent PNG in /public, e.g. '/portrait.png'). When set it replaces the system graph in the hero.
+  photo: null,
   // Set to a path in /public (e.g. '/Ajay_Parihar_Resume.pdf') to show the Resume buttons.
   resume: null,
   social: {
