@@ -271,7 +271,7 @@ export const moreProjects = [
       'Mobile support; moderation (kick, ban, mute, vote-kick, report) persisted in PostgreSQL via Prisma.',
     ],
     stack: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Zustand', 'Socket.IO', 'Node.js', 'PostgreSQL'],
-    links: {},
+    links: { demo: 'https://scribbleaddaa.online' },
   },
   {
     id: 'fitnessos',
