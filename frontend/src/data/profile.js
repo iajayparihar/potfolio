@@ -35,7 +35,7 @@ export const navItems = [
 ];
 
 export const signals = [
-  'Python', 'Django', 'FastAPI', 'PostgreSQL', 'Redis', 'AWS', 'Docker', 'Kubernetes', 'Generative AI', 'RAG',
+  'Python', 'Django', 'FastAPI', 'PostgreSQL', 'Redis', 'AWS', 'Docker', 'Kubernetes', 'GCP', 'Web3', 'Generative AI', 'LangGraph',
 ];
 
 export const about = [
@@ -104,12 +104,42 @@ export const experience = [
         ],
       },
     ],
-    stack: ['Python', 'Django', 'DRF', 'FastAPI', 'PostgreSQL', 'Docker', 'Kubernetes'],
+    stack: ['Python', 'Django', 'DRF', 'FastAPI', 'PostgreSQL', 'Docker', 'Kubernetes', 'Celery', 'Web3', 'LangGraph', 'GCP'],
   },
 ];
 
 // Flow diagrams: each step has a short label, a mono tag and a one-line explanation.
 export const featured = [
+  {
+    id: 'xalts',
+    name: 'XALTS',
+    subtitle: 'AI-Powered Crypto Investment Platform',
+    what: 'A blockchain platform for crypto fund management and Asset-Backed NFTs, with AI workflows and automated investment operations.',
+    why: 'Investment operations move real money and market data: auth, subscriptions and AI-driven steps have to be reliable, auditable and kept off the request path.',
+    how: 'Django and FastAPI services behind REST APIs, PostgreSQL as the system of record, Celery for background jobs, Web3 and stock-market data integrations, OpenAI with LangChain and LangGraph for AI agents, and real-time dashboards. Deployed on GCP with Docker.',
+    highlights: [
+      'Crypto fund management', 'Asset-Backed NFTs', 'Subscriptions', 'Investment workflows', 'AI agents',
+      'Web3 / blockchain', 'Stock-market data', 'Notifications', 'Real-time dashboards',
+    ],
+    stack: ['Python', 'Django', 'DRF', 'FastAPI', 'React.js', 'PostgreSQL', 'Celery', 'Web3', 'OpenAI GPT', 'LangChain', 'LangGraph', 'GCP', 'Docker'],
+    decisions: [
+      'Investment and data-sync work runs in Celery workers, off the request path.',
+      'AI agents are orchestrated as explicit LangGraph workflows rather than free-form prompts.',
+      'Django handles auth, subscriptions and core APIs; FastAPI serves the AI and data-heavy services.',
+    ],
+    flow: [
+      { label: 'Client', tag: 'react', note: 'React.js app with real-time dashboards.' },
+      { label: 'API Layer', tag: 'django · fastapi', note: 'REST APIs, auth and subscriptions.' },
+      { label: 'Investment Workflows', tag: 'domain', note: 'Fund management and automated investment operations.' },
+      { label: 'PostgreSQL', tag: 'store', note: 'Relational system of record.' },
+    ],
+    branches: [
+      { label: 'Celery', tag: 'workers', note: 'Background jobs and notifications.' },
+      { label: 'AI Agents', tag: 'langgraph', note: 'OpenAI GPT with LangChain and LangGraph workflows.' },
+      { label: 'Web3', tag: 'blockchain', note: 'Blockchain and Asset-Backed NFT integration.' },
+      { label: 'Market Data', tag: 'stocks', note: 'Stock-market data systems.' },
+    ],
+  },
   {
     id: 'officertrack',
     name: 'OfficerTrack',
@@ -185,7 +215,7 @@ export const aiPipeline = [
 ];
 
 export const aiTopics = [
-  'LLMs', 'RAG', 'AI Agents', 'LangChain', 'OpenAI', 'Async AI services', 'AI APIs', 'Automated processing', 'Context-aware routing',
+  'LLMs', 'RAG', 'AI Agents', 'LangChain', 'LangGraph', 'OpenAI', 'Async AI services', 'AI APIs', 'Automated processing', 'Context-aware routing',
 ];
 
 export const securityLayers = [
@@ -248,6 +278,9 @@ export const technologies = [
   { name: 'LangChain', cat: 'AI', note: 'Composing LLM calls, retrievers and tools.' },
   { name: 'OpenAI', cat: 'AI', note: 'GPT models, including GPT-4o, behind async APIs.' },
   { name: 'AI Agents', cat: 'AI', note: 'Agent workflows that call tools and services.' },
+  { name: 'LangGraph', cat: 'AI', note: 'Stateful, graph-based orchestration of AI agent workflows.' },
+  { name: 'Web3', cat: 'Backend', note: 'Blockchain integration for crypto funds and Asset-Backed NFTs.' },
+  { name: 'GCP', cat: 'Cloud', note: 'Google Cloud deployments for containerised services.' },
   { name: 'AWS', cat: 'Cloud', note: 'Cloud infrastructure for deploying backend services.' },
   { name: 'GCS', cat: 'Cloud', note: 'Google Cloud Storage for secure file and data pipelines.' },
   { name: 'Docker', cat: 'Infrastructure', note: 'Containerised services for consistent environments.' },
