@@ -458,7 +458,7 @@
 .contact-title span { display: block; background: var(--grad-accent); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .contact-copy { max-width: 52ch; font-size: var(--fs-md); }
 .contact-email { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s-3); padding: 8px 8px 8px 18px; border: 1px solid var(--line-2); border-radius: var(--r-pill); background: var(--bg-1); max-width: 100%; }
-.contact-email a { color: var(--text-1); font-size: var(--fs-sm); overflow-wrap: anywhere; }
+.contact-email a { color: var(--text-1); font-family: var(--font-sans); font-size: var(--fs-base); font-weight: 500; letter-spacing: 0.01em; overflow-wrap: anywhere; }
 .contact-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3); }
 
 .footer { border-top: 1px solid var(--line); padding: var(--s-6) 0; }

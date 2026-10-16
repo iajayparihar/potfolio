@@ -26,7 +26,7 @@ export default function Contact() {
         </p>
 
         <div className="contact-email" data-reveal style={{ '--d': 3 }}>
-          <a href={`mailto:${profile.email}`} className="mono">{profile.email}</a>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
           <button type="button" className="btn btn--sm" onClick={copy} aria-label="Copy email address">
             {copied ? <Check size={14} aria-hidden="true" /> : <Copy size={14} aria-hidden="true" />}
             {copied ? 'Copied' : 'Copy'}
